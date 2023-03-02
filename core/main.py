@@ -6,6 +6,20 @@ class Pessoa:
         cpf=''
         telefone=''
         endereco=''
+        
+
+class Cliente(Pessoa):
+    
+    class Meta:
+        histpay=[]
+
+class Funcionario(Pessoa):
+
+    class Meta:
+        salario=0.0
+        funcao=''
+        data_entrada=''
+        data_saida=''
 
 class Animal:
 
@@ -17,14 +31,29 @@ class Animal:
         nome=''
         peso=1.0
         vacinas=[]
+        tutor= Pessoa()
+
+class Servico:
+
+    class Meta:
+        descricao=''
+        valor=''
+
+class Agenda:
+
+    class Meta:
+        data=''
+        cliente= Animal()
+        servicos= Servico[]
+
+    def agendar(cliente,servicos,data):
+        agenda_geral.append()
 
 
-alfredo = Animal()
-alfredo.tipo='cachorro'
-alfredo.raca='Poodle'
-alfredo.idade=8
-alfredo.peso=7
+class Venda:
 
-dog=alfredo
-dog.nome='alfredo'
-print(dog.nome)
+    def realizarPagamento(itens, cliente, tipo_pagamento):
+        if pagar(itens.total, tipo_pagamento):
+            cliente.histpay.append(itens,data)
+
+    
