@@ -1,59 +1,57 @@
-
-class Pessoa:
-
-    class Meta:
-        nome=''
-        cpf=''
-        telefone=''
-        endereco=''
-        
-
-class Cliente(Pessoa):
-    
-    class Meta:
-        histpay=[]
-
-class Funcionario(Pessoa):
-
-    class Meta:
-        salario=0.0
-        funcao=''
-        data_entrada=''
-        data_saida=''
-
 class Animal:
 
-    class Meta:
-        tipo=''
-        raca=''
-        porte=''
-        idade=0
-        nome=''
-        peso=1.0
-        vacinas=[]
-        tutor= Pessoa()
+    def __init__(self):
+        self.nome=''
+        self.idade=0
+        self.raca=''
+        self.porte=''
+        self.vacinas=[]
+        self.historico=[]
+    
+class Usuario:
 
-class Servico:
+    def __init__(self):
+        self.nome=''
+        self.telefone=''
+        self.email=''
+        self.cpf=''
+        self.endereco=''
+        self.data_cadastro=''
 
-    class Meta:
-        descricao=''
-        valor=''
+class Cliente(Usuario):
+
+    def __init__(self):
+        self.pet=Animal()
+
+class Funcionario(Usuario):
+
+    def __init__(self):
+        self.salario=0.0
+        self.funcao=''
+        self.horario=''
+        self.escala=''
+
+class Atendimento:
+
+    def __init__(self):
+        self.data=''
+        self.hora=''
+        self.animal=Animal()
+        self.tutor=Cliente()
+        self.motivo=''
 
 class Agenda:
 
-    class Meta:
-        data=''
-        cliente= Animal()
-        servicos= Servico[]
-
-    def agendar(cliente,servicos,data):
-        agenda_geral.append()
-
-
-class Venda:
-
-    def realizarPagamento(itens, cliente, tipo_pagamento):
-        if pagar(itens.total, tipo_pagamento):
-            cliente.histpay.append(itens,data)
-
     
+    def __init__(self):
+        self.agendamentos=[]
+    
+    def agendarConsulta(self, cliente, atendimento):
+        pass
+
+    def cancelarConsulta(self, cliente):
+        pass
+
+    def listarAgendamentos(self):
+        for atendimento in self.agendamentos:
+            print(f'{atendimento.data} - {atendimento.hora} - {atendimento.animal} - {atendimento.tutor}')
