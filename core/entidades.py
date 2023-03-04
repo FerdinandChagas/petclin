@@ -50,12 +50,12 @@ class Agenda:
     def __init__(self):
         self.agendamentos = []
     
-    def agendarConsulta(self, cliente, atendimento):
-        pass
+    def agendarConsulta(self, atendimento):
+        self.agendamentos.append(atendimento)
 
     def cancelarConsulta(self, cliente):
         pass
 
     def listarAgendamentos(self):
         for atendimento in self.agendamentos:
-            print(f'{atendimento.data} - {atendimento.hora} - {atendimento.animal} - {atendimento.tutor}')
+            print(f'{atendimento.data} - {atendimento.hora} - {atendimento.animal.nome} - {atendimento.tutor.nome}')
