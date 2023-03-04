@@ -33,6 +33,7 @@ class Funcionario(Usuario):
         self.funcao = ''
         self.horario = ''
         self.escala = ''
+        self.folha_ponto = []
 
 
 class Atendimento:
