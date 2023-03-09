@@ -8,7 +8,7 @@ dog.nome = 'Alfredo'
 dog.idade = 7
 
 atendimento = Atendimento()
-atendimento.data='10/03/2023'
+atendimento.data= datetime.now()
 atendimento.hora='10:00'
 atendimento.animal= dog
 atendimento.tutor = cliente
