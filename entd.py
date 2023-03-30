@@ -34,13 +34,14 @@ class Animal:
         self.historico = historico  # list<atendimento>
 
 class Pagamento:
-    def _init_(self, forma: str, parcelamento: int, valor: float):
+    def _init_(self, forma: str, parcelamento: int, valor: float, situacao: bool):
         self.forma = forma
         self.parcelamento = parcelamento
         self.valor = valor
+        self.situacao = situacao
 
 class Atendimento:
-    def __init__(self, data: str, hora: str, animal: Animal, tutor: Cliente, motivo: str, tipo: str, pagamento: Pagamento):
+    def __init__(self, data: str, hora: str, animal: Animal, tutor: Cliente, motivo: str, tipo: str, pagamento: Pagamento, situacao: bool):
         self.data = data
         self.hora = hora
         self.animal = animal
@@ -48,6 +49,7 @@ class Atendimento:
         self.motivo = motivo
         self.tipo = tipo
         self.pagamento = pagamento  # classe pagamento
+        self.situacao = situacao
 
 class Medicamento:
     def __init__(self, nome: str, fabricante: str, quantidade: int, validade: str, valor: float):
