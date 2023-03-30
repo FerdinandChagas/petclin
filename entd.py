@@ -50,6 +50,21 @@ class Atendimento:
         self.tipo = tipo
         self.pagamento = pagamento  # classe pagamento
         self.situacao = situacao
+   
+    def _str_(self) -> str:
+        def str_tutor(): 
+            return f"Nome: {self.tutor.nome}\tCPF: {self.tutor.cpf}\tEmail: {self.tutor.email}\t"  
+        def str_animal():
+            return f"Nome: {self.animal.nome}\tIdade: {self.animal.idade}\Raça: {self.animal.raca}\t" 
+        def str_pagamento():
+            return f"Forma: {self.pagamento.forma}\tParcelamento: {self.pagamento.parcelamento}\Valor: {self.pagamento.valor}\t"
+        return \
+        f"data: {self.data}\thora: {self.hora}\n" \
+        + f"Motivo: {self.motivo}\tTipo: {self.tipo}\n" \
+        + f"Tutor: {str_tutor() if self.tutor else '-'}\n" \
+        + f"Animal: {str_animal() if self.animal else '-'}\n" \
+        + f"Pagamento: {str_pagamento() if self.pagamento else '-'}\n" \
+        + f"Situação: {'Ativo' if self.situacao else 'Cancelado'}"
 
 class Medicamento:
     def __init__(self, nome: str, fabricante: str, quantidade: int, validade: str, valor: float):
