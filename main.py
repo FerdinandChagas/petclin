@@ -11,7 +11,9 @@ def render_agendamentos():
         print("-------------1- Realize um Agendamento -------------")
         print("-------------2 - Listar todos os Agendamentos-------------")
         print("-------------3 - Cancelar um Agendamento -------------")
-        print("-------------          4 - Sair         -------------")
+        print("-------------4 - Realize uma prescrição -------------")
+        print("-------------5 - Listar todas as Prescrições -------------")
+        print("-------------          6 - Sair         -------------")
         indice_menu = int(input())
         if indice_menu == 1:
             data = datetime.now()
@@ -28,6 +30,10 @@ def render_agendamentos():
             controle_agendamento.cancelarConsulta()
             #Falta as opções do controle de usuario pra buscarmos o cliente
         elif indice_menu == 4:
+            controle_agendamento.adicionarPrescicao()
+        elif indice_menu == 5:
+            controle_agendamento.obterPrescricoes()
+        elif indice_menu == 6:
             break
  
 render_agendamentos()
