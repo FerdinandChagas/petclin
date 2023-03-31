@@ -22,7 +22,7 @@ def render_agendamentos():
             result_input = input()
             print("informe um tipo")
             result_input_tipo = input()
-            atendimento = Atendimento(data=str(data.date()),hora=hora, animal=None, tutor=None, motivo=result_input, tipo=result_input_tipo, pagamento=None )
+            atendimento = Atendimento(data=str(data.date()),hora=hora, animal=None, tutor=None, motivo=result_input, tipo=result_input_tipo, pagamento=None, situacao=False)
             controle_agendamento.agendarConsulta(atendimento)
         elif indice_menu == 2:
             print([str(a) for a in controle_agendamento.listarAgendamentos()])

@@ -51,20 +51,20 @@ class Atendimento:
         self.pagamento = pagamento  # classe pagamento
         self.situacao = situacao
    
-    def _str_(self) -> str:
+    def __str__(self) -> str:
         def str_tutor(): 
-            return f"Nome: {self.tutor.nome}\tCPF: {self.tutor.cpf}\tEmail: {self.tutor.email}\t"  
+            return f"Nome: {self.tutor.nome} | CPF: {self.tutor.cpf} | Email: {self.tutor.email} | "  
         def str_animal():
-            return f"Nome: {self.animal.nome}\tIdade: {self.animal.idade}\Raça: {self.animal.raca}\t" 
+            return f"Nome: {self.animal.nome} | Idade: {self.animal.idade} | Raça: {self.animal.raca} | " 
         def str_pagamento():
-            return f"Forma: {self.pagamento.forma}\tParcelamento: {self.pagamento.parcelamento}\Valor: {self.pagamento.valor}\t"
+            return f"Forma: {self.pagamento.forma} | Parcelamento: {self.pagamento.parcelamento} | Valor: {self.pagamento.valor} | "
         return \
-        f"data: {self.data}\thora: {self.hora}\n" \
-        + f"Motivo: {self.motivo}\tTipo: {self.tipo}\n" \
-        + f"Tutor: {str_tutor() if self.tutor else '-'}\n" \
-        + f"Animal: {str_animal() if self.animal else '-'}\n" \
-        + f"Pagamento: {str_pagamento() if self.pagamento else '-'}\n" \
-        + f"Situação: {'Ativo' if self.situacao else 'Cancelado'}"
+        f"data: {self.data} | hora: {self.hora} | " \
+        + f"Motivo: {self.motivo} | Tipo: {self.tipo} | " \
+        + f"Tutor: {str_tutor() if self.tutor else '-'} | " \
+        + f"Animal: {str_animal() if self.animal else '-'} | " \
+        + f"Pagamento: {str_pagamento() if self.pagamento else '-'} | " \
+        + f"Situação: {'Ativo' if not self.situacao else 'Cancelado'}"
 
 class Medicamento:
     def __init__(self, nome: str, fabricante: str, quantidade: int, validade: str, valor: float):
