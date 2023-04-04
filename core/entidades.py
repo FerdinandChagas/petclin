@@ -59,6 +59,18 @@ class Medicamento:
         self.validade = validade
         self.valor = valor
 
+class Exame:
+    def __init__(self, paciente: Animal(), responsavel: Cliente(), profissional: Funcionario(), sintoma: str, dataExame: str, diagnostico: str, dataDiagnostico: str, medicacao: Medicamento(), situacao: bool):
+        self.paciente = paciente
+        self.responsavel = responsavel
+        self.profissional = profissional
+        self.sintoma = sintoma
+        self.dataExame = dataExame
+        self.diagnostico = diagnostico
+        self.dataDiagnostico = dataDiagnostico
+        self.medicacao = medicacao
+        self.situacao = situacao
+
 class Agenda:
 
     def __init__(self):
