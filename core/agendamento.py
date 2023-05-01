@@ -1,5 +1,6 @@
+from datetime import datetime
 from typing import List
-from core.entidades import Atendimento, Cliente, Medicamento
+from .entidades import Atendimento, Medicamento
 
 
 class Agendamento():
@@ -11,7 +12,17 @@ class Agendamento():
 
     def agendarConsulta(self, atendimento: Atendimento) -> bool:
         """Função responsavel por adicionar um agendamento"""
-
+        date_atual = datetime.now()
+        
+        data_atual = '{}-{}-{}'.format(date_atual.year, date_atual.month if date_atual.month > 9 else str('0'+ str(date_atual.month)) , date_atual.day if date_atual.day > 9 else str('0'+ str(date_atual.day)))
+        hora_atual = '{}:{}'.format(date_atual.hour, date_atual.minute
+        )
+        for  i in range(0, len(self.__agendamentos)):
+            atendimento = self.__agendamentos[i]
+            if atendimento.data == data_atual:
+                if atendimento.hora == hora_atual:
+                    raise ValueError ("Não é possivel realizar este agendamento, horario ocupado! Por favor, tente outro")
+                
         self.__agendamentos.append(atendimento)
         return True
 
