@@ -1,5 +1,5 @@
 from typing import List
-from entd import Atendimento, Cliente, Medicamento
+from .entidades import Atendimento, Cliente, Medicamento
 
 class Agendamento():
     """Classe responsavel pelos agendamentos"""

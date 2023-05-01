@@ -1,6 +1,7 @@
 from datetime import datetime
-from agendamento import Agendamento
-from entd import Atendimento
+
+from core.agendamento import Agendamento
+from core.entidades import Atendimento
 
 def render_agendamentos():
 
