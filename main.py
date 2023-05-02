@@ -1,10 +1,13 @@
 from datetime import datetime
 from core.agendamento import Agendamento
-from core.entidades import Animal, Cliente
+from core.entidades import Animal, Cliente, Medicamento
 from core.entidades import Atendimento
+from core.entidades import Exame
+from utils.medicamento import get_medicamentos
 from utils.clients import get_clients
 
 clients = get_clients()
+medicamentos = get_medicamentos()
 
 
 def clients_search_by_id() -> Cliente:
@@ -32,6 +35,39 @@ def animals_search_by_id(client: Cliente) -> Animal:
         print("informe um indice valido")
         return animals_search_by_id()
     return animals[indice_menu]
+
+
+def medicamento_search_by_id() -> Medicamento:
+    size = len(medicamentos)
+    print("------------- Medicamentos -------------")
+    print("------------- Busque por index -------------")
+    for index in range(0, size):
+        print(f"{index}- {medicamentos[index].nome}")
+    indice_menu = int(input())
+    if indice_menu < 0 or indice_menu > size:
+        print("informe um indice valido")
+        return medicamento_search_by_id()
+    return medicamentos[indice_menu]
+
+
+def render_exame(atendimento: Atendimento):
+    while True:
+        print("-------------Menu de Opções de exames-------------")
+        print("-------------1 - Registrar Prescrição -------------")
+        print("-------------2 - Listar todas as Prescrições -------------")
+        print("-------------          3 - Sair         -------------")
+        indice_menu = int(input())
+        if indice_menu == 1:
+            situacao = input()
+            sintoma = input()
+            diagnostico = input()
+
+            atendimento.exames.append(Exame(medicacao=medicamento_search_by_id(), paciente=atendimento.animal, responsavel=atendimento.tutor, situacao=situacao, dataDiagnostico=str(datetime.now().date()), sintoma=sintoma, dataExame=str(datetime.now().date()), diagnostico=diagnostico, profissional=None))
+        elif indice_menu == 2:
+            for exame in atendimento.exames:
+                print(exame)
+        else:
+            break
 
 
 def render_agendamentos():
@@ -72,9 +108,10 @@ def render_agendamentos():
                 client = clients_search_by_id()
                 animal = animals_search_by_id(client)
                 atendimento = Atendimento(data=str(data.date()), hora=hora, animal=animal, tutor=client,
-                                        motivo=result_input, tipo=result_input_tipo, pagamento=None, situacao=False)
+                                        motivo=result_input, tipo=result_input_tipo, pagamento=None, situacao=False, exames=[])
                 animal.historico.append(atendimento)
                 controle_agendamento.agendarConsulta(atendimento)
+                render_exame(atendimento=atendimento)
             except ValueError as e:
                 print(e)
         elif indice_menu == 2:

@@ -1,3 +1,4 @@
+from typing import List
 import uuid
 
 
@@ -62,7 +63,7 @@ class Animal:
             'raca': self.raca,
             'porte': self.porte,
             'vacinas': self.vacinas,
-            'historico': self.historico
+            'historico': [str (h) for h in self.historico]
         })
 
 
@@ -72,36 +73,6 @@ class Pagamento:
         self.parcelamento = parcelamento
         self.valor = valor
         self.situacao = situacao
-
-
-class Atendimento:
-    def __init__(self, data: str, hora: str, animal: Animal, tutor: Cliente, motivo: str, tipo: str, pagamento: Pagamento, situacao: bool):
-        self.data = data
-        self.hora = hora
-        self.animal = animal
-        self.tutor = tutor
-        self.motivo = motivo
-        self.tipo = tipo
-        self.pagamento = pagamento  # classe pagamento
-        self.situacao = situacao
-        self.id = str(uuid.uuid4())
-
-    def __str__(self) -> str:
-        def str_tutor():
-            return f"Nome: {self.tutor.nome} | CPF: {self.tutor.cpf} | Email: {self.tutor.email} | "
-
-        def str_animal():
-            return f"Nome: {self.animal.nome} | Idade: {self.animal.idade} | Raça: {self.animal.raca} | "
-
-        def str_pagamento():
-            return f"Forma: {self.pagamento.forma} | Parcelamento: {self.pagamento.parcelamento} | Valor: {self.pagamento.valor} | "
-        return \
-            f"data: {self.data} | hora: {self.hora} | " \
-            + f"Motivo: {self.motivo} | Tipo: {self.tipo} | " \
-            + f"Tutor: {str_tutor() if self.tutor else '-'} | " \
-            + f"Animal: {str_animal() if self.animal else '-'} | " \
-            + f"Pagamento: {str_pagamento() if self.pagamento else '-'} | " \
-            + f"Situação: {'Ativo' if not self.situacao else 'Cancelado'}"
 
 
 class Medicamento:
@@ -124,6 +95,40 @@ class Exame:
         self.dataDiagnostico = dataDiagnostico
         self.medicacao = medicacao
         self.situacao = situacao
+
+    def __str__(self) -> str:
+        return str('paciente: ' + self.paciente.__str__()) #falta fazer para todos os atts de medicamento
+
+class Atendimento:
+    def __init__(self, data: str, hora: str, animal: Animal, tutor: Cliente, motivo: str, tipo: str, pagamento: Pagamento, situacao: bool, exames: List[Exame]):
+        self.data = data
+        self.hora = hora
+        self.animal = animal
+        self.tutor = tutor
+        self.motivo = motivo
+        self.tipo = tipo
+        self.pagamento = pagamento  # classe pagamento
+        self.situacao = situacao
+        self.exames = exames
+        self.id = str(uuid.uuid4())
+
+    def __str__(self) -> str:
+        def str_tutor():
+            return f"Nome: {self.tutor.nome} | CPF: {self.tutor.cpf} | Email: {self.tutor.email} | "
+
+        def str_animal():
+            return f"Nome: {self.animal.nome} | Idade: {self.animal.idade} | Raça: {self.animal.raca} | "
+
+        def str_pagamento():
+            return f"Forma: {self.pagamento.forma} | Parcelamento: {self.pagamento.parcelamento} | Valor: {self.pagamento.valor} | "
+        return \
+            f"data: {self.data} | hora: {self.hora} | " \
+            + f"Motivo: {self.motivo} | Tipo: {self.tipo} | " \
+            + f"Tutor: {str_tutor() if self.tutor else '-'} | " \
+            + f"Animal: {str_animal() if self.animal else '-'} | " \
+            + f"Pagamento: {str_pagamento() if self.pagamento else '-'} | " \
+            + f"Situação: {'Ativo' if not self.situacao else 'Cancelado'}"
+
 
 
 class Agenda:
