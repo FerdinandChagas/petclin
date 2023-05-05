@@ -8,7 +8,7 @@ names_animals = ['Akita', 'Basset hound', 'Beagle', 'Bichon frisé', 'Boiadeiro 
 def get_animals():
     animals = []
 
-    for _ in range(0, 1):
+    for _ in range(0, 3):
         animals.append(Animal(nome=get_name(), idade=get_number(), raca=random(
             names_animals), porte='', vacinas=[], historico=[]))
 

@@ -1,130 +1,143 @@
 from datetime import datetime
 from core.agendamento import Agendamento
-from core.entidades import Animal, Cliente, Medicamento
-from core.entidades import Atendimento
-from core.entidades import Exame
+from core.entidades import Animal, Cliente, Medicamento, Funcionario, Exame, Atendimento
+from core.pagamento import processar_pagamento
+from utils.funcionario import get_funcionarios
 from utils.medicamento import get_medicamentos
 from utils.clients import get_clients
+from utils.render import render_search
+from utils.print import clean
 
 clients = get_clients()
 medicamentos = get_medicamentos()
+funcionarios = get_funcionarios()
+controle_agendamento = Agendamento()
 
 
 def clients_search_by_id() -> Cliente:
-    size = len(clients)
-    print("------------- Clientes -------------")
-    print("------------- Busque por index -------------")
-    for index in range(0, size):
-        print(f"{index}- {clients[index].nome}")
-    indice_menu = int(input())
-    if indice_menu < 0 or indice_menu > size:
-        print("informe um indice valido")
-        return clients_search_by_id()
-    return clients[indice_menu]
+    clean()
+    return render_search("Clientes", clients)
+
+
+def funcionarios_search_by_id() -> Funcionario:
+    clean()
+    return render_search("Profissionais", funcionarios)
 
 
 def animals_search_by_id(client: Cliente) -> Animal:
-    animals = client.pets
-    size = len(animals)
-    print("------------- Animais -------------")
-    print("------------- Busque por index -------------")
-    for index in range(0, size):
-        print(f"{index}- {animals[index].nome}")
-    indice_menu = int(input())
-    if indice_menu < 0 or indice_menu > size:
-        print("informe um indice valido")
-        return animals_search_by_id()
-    return animals[indice_menu]
+    clean()
+    return render_search("Animais", client.pets)
 
 
 def medicamento_search_by_id() -> Medicamento:
-    size = len(medicamentos)
-    print("------------- Medicamentos -------------")
-    print("------------- Busque por index -------------")
-    for index in range(0, size):
-        print(f"{index}- {medicamentos[index].nome}")
-    indice_menu = int(input())
-    if indice_menu < 0 or indice_menu > size:
-        print("informe um indice valido")
-        return medicamento_search_by_id()
-    return medicamentos[indice_menu]
+    clean()
+    return render_search("Medicamentos", medicamentos)
 
 
-def render_exame(atendimento: Atendimento):
-    while True:
-        print("-------------Menu de Opções de exames-------------")
-        print("-------------1 - Registrar Prescrição -------------")
-        print("-------------2 - Listar todas as Prescrições -------------")
-        print("-------------          3 - Sair         -------------")
-        indice_menu = int(input())
-        if indice_menu == 1:
-            situacao = input()
-            sintoma = input()
-            diagnostico = input()
-
-            atendimento.exames.append(Exame(medicacao=medicamento_search_by_id(), paciente=atendimento.animal, responsavel=atendimento.tutor, situacao=situacao, dataDiagnostico=str(datetime.now().date()), sintoma=sintoma, dataExame=str(datetime.now().date()), diagnostico=diagnostico, profissional=None))
-        elif indice_menu == 2:
-            for exame in atendimento.exames:
-                print(exame)
-        else:
-            break
+def add_exame(atendimento: Atendimento):
+    if atendimento:
+        clean()
+        print("\n--- Dados para preenchimento Exame ---\n".upper())
+        print("\nInforme a situação: ".upper())
+        situacao = input()
+        print("\nInforme a sintoma: ".upper())
+        sintoma = input()
+        print("\nInforme a Diagnóstico: ".upper())
+        diagnostico = input()
+        controle_agendamento.adicionarPrescicao(atendimento, Exame(medicacao=medicamento_search_by_id(), paciente=atendimento.animal, responsavel=atendimento.tutor, situacao=situacao, dataDiagnostico=str(
+            datetime.now().date()), sintoma=sintoma, dataExame=str(datetime.now().date()), diagnostico=diagnostico, profissional=funcionarios_search_by_id()))
 
 
 def render_agendamentos():
 
-    controle_agendamento = Agendamento()
-
     def atendimento_search_by_id():
-        atendimentos = controle_agendamento.listarAgendamentos()
-        size = len(atendimentos)
-        print("------------- Listar dos atendimentos -------------")
-        print("------------- Busque por index -------------")
-        for index in range(0, size):
-            atendimento = atendimentos[index]
-            print(f"{index}- {atendimento.motivo} | {atendimento.tipo}")
-        indice_menu = int(input())
-        if indice_menu < 0 or indice_menu > size:
-            print("informe um indice valido")
-            return atendimento_search_by_id()
-        return atendimentos[indice_menu]
+        clean()
+        return render_search("Atendimentos", controle_agendamento.listarAgendamentos())
 
     while True:
-        print("-------------Menu de Opções de agendamentos-------------")
-        print("-------------1 - Realize um Agendamento -------------")
-        print("-------------2 - Listar todos os Agendamentos -------------")
-        print("-------------3 - Cancelar um Agendamento -------------")
-        print("-------------4 - Realize uma prescrição -------------")
-        print("-------------5 - Listar todas as Prescrições -------------")
-        print("-------------          6 - Sair         -------------")
+        print("\n------------- Menu de Opções de agendamentos -------------".upper())
+        print("------------- 1 - Realize um Agendamento -------------".upper())
+        print("------------- 2 - Listar todos os Agendamentos -------------".upper())
+        print("------------- 3 - Cancelar um Agendamento -------------".upper())
+        print(
+            "------------- 4 - Listar as Prescrições por agendamento -------------".upper())
+        print("------------- 5 - Listar todas as Prescrições -------------".upper())
+        print(
+            "------------- 6 - Listar as Solicitações de Exames por agendamento -------------".upper())
+        print(
+            "------------- 7 - Listar todas as Solicitações de Exames -------------".upper())
+
+        print("-------------          8 - Sair         -------------".upper())
+        print("\ninforme sua entrada: ".upper())
         indice_menu = int(input())
         if indice_menu == 1:
+            clean()
             try:
+                print("\n--- Dados para preenchimento Atendimento ---\n".upper())
                 data = datetime.now()
                 hora = f'{data.hour}:{data.minute}'
-                print("informe um motivo")
-                result_input = input()
-                print("informe um tipo")
+                print("\ninforme um motivo: ".upper())
+                result_input_motivo = input()
+                print("\ninforme um tipo: ".upper())
                 result_input_tipo = input()
                 client = clients_search_by_id()
                 animal = animals_search_by_id(client)
                 atendimento = Atendimento(data=str(data.date()), hora=hora, animal=animal, tutor=client,
-                                        motivo=result_input, tipo=result_input_tipo, pagamento=None, situacao=False, exames=[])
-                animal.historico.append(atendimento)
+                                          motivo=result_input_motivo, tipo=result_input_tipo, pagamento=processar_pagamento(), situacao=False, exames=[])
                 controle_agendamento.agendarConsulta(atendimento)
-                render_exame(atendimento=atendimento)
+                animal.historico.append(atendimento)
+                add_exame(atendimento=atendimento)
+                clean()
             except ValueError as e:
                 print(e)
         elif indice_menu == 2:
-            for a in controle_agendamento.listarAgendamentos():
-                print(a)
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem atendimentos\n".upper())
+            else:
+                for a in controle_agendamento.listarAgendamentos():
+                    print(a)
         elif indice_menu == 3:
-            controle_agendamento.cancelarConsulta(atendimento_search_by_id())
-            # Falta as opções do controle de usuario pra buscarmos o cliente
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem atendimentos\n".upper())
+            else:
+                controle_agendamento.cancelarConsulta(
+                    atendimento_search_by_id())
+                clean()
         elif indice_menu == 4:
-            controle_agendamento.adicionarPrescicao()
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem Prescrições\n".upper())
+            else:
+                for medicamento in controle_agendamento.obterPrescricoes(
+                        atendimento_search_by_id()):
+                    print(medicamento)
         elif indice_menu == 5:
-            controle_agendamento.obterPrescricoes()
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem Prescrições\n".upper())
+            else:
+                for atendimento in controle_agendamento.listarAgendamentos():
+                    for medicamento in controle_agendamento.obterPrescricoes(atendimento):
+                        print(medicamento)
         elif indice_menu == 6:
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem Solicitações\n".upper())
+            else:
+                for solicitacao in controle_agendamento.obterSolicitacoes(atendimento_search_by_id()):
+                    print(solicitacao)
+
+        elif indice_menu == 7:
+            clean()
+            if controle_agendamento.empty():
+                print("\nSem Solicitações\n".upper())
+            else:
+                for atendimento in controle_agendamento.listarAgendamentos():
+                    for exame in controle_agendamento.obterSolicitacoes(atendimento):
+                        print(exame)
+        elif indice_menu == 8:
             break
 
 

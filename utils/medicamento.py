@@ -9,12 +9,10 @@ names_medicamento = [
     "ORENCIA",
     "REOPRO",
     "CALQUENCE",
-    "Nenhum nome comercial nos EUA",
     "PRECOSE",
     "SECTRAL",
     "DIAMOX",
     "ACETADOTE",
-    "Nenhum nome comercial nos EUA",
     "SORIATANE",
     "TUDORZA PRESSAIR",
     "ZOVIRAX",
@@ -45,23 +43,16 @@ names_medicamento = [
     "CAVERJECT, EDEX, MUSE",
     "ACTIVASE",
     "ENTEREG",
-    "Nenhum nome comercial nos EUA",
     "LETAIRIS",
     "ETHYOL",
-    "Nenhum nome comercial nos EUA",
     "MIDAMOR",
-    "Nenhum nome comercial nos EUA",
     "NEXTERONE",
-    "Nenhum nome comercial nos EUA",
     "NORVASC",
     "RYBREVANT",
-    "Nenhum nome comercial nos EUA",
-    "Nenhum nome comercial nos EUA",
     "AMOXIL",
     "AUGMENTIN",
     "ADDERALL XR 10",
     "ABELCET, AMBISOME",
-    "Nenhum nome comercial nos EUA",
     "UNASYN",
     "AGRYLIN",
     "KINERET",
@@ -69,21 +60,17 @@ names_medicamento = [
     "Andexxa",
     "ERAXIS",
     "EBANGA",
-    "Nenhum nome comercial nos EUA",
     "ERLEADA",
     "ELIQUIS",
     "APOKYN",
     "IOPIDINE",
     "OTEZLA",
     "EMEND",
-    "Nenhum nome comercial nos EUA",
     "BROVANA",
-    "Nenhum nome comercial nos EUA",
     "R-GENE 10",
     "ABILIFY",
     "NUVIGIL",
     "COARTEM",
-    "Nenhum nome comercial nos EUA",
     "ELSPAR",
     "DURLAZA",
     "Translarna",
@@ -94,7 +81,6 @@ names_medicamento = [
     "LIPITOR",
     "MEPRON",
     "MALARONE",
-    "Nenhum nome comercial nos EUA",
     "ATROPEN",
     "RIDAURA",
     "STENDRA",
@@ -108,7 +94,6 @@ names_medicamento = [
     "EDARBI",
     "ZITHROMAX",
     "AZACTAM",
-    "Nenhum nome comercial nos EUA",
     "PHOSLYRA",
     "ARANESP",
     "PULMOZYME",
@@ -123,16 +108,20 @@ names_medicamento = [
     "CUROSURF"
 ]
 
+
 def get_medicamento():
     return random(array=names_medicamento)
 
+
 def get_fabricante():
     return random(array=names_medicamento)
+
 
 def get_medicamentos() -> List[Medicamento]:
     medicamentos = []
 
     for _ in range(0, 10):
-        medicamentos.append(Medicamento(nome=get_medicamento(), fabricante=get_fabricante(), quantidade=10, validade='01/10/2024', valor=50.0) )
+        medicamentos.append(Medicamento(nome=get_medicamento(
+        ), fabricante=get_fabricante(), quantidade=10, validade='01/10/2024', valor=50.0))
 
     return medicamentos

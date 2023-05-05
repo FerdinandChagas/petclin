@@ -50,7 +50,7 @@ def get_email(value: str):
 def get_clients() -> List[Cliente]:
     clients = []
 
-    for _ in range(0, 3):
+    for _ in range(0, 10):
         client = Cliente(get_animals(), [])
         client.nome = get_name().capitalize()
         client.telefone = get_phone()
