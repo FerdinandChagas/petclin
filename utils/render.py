@@ -1,7 +1,7 @@
 
 
 from utils.print import clean
-
+"""Usado para renderizar uma lista de itens onde ao mesmo tempo consulta"""
 
 def render_search(title: str, items: list):
     size = len(items)

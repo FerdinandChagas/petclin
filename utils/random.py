@@ -1,5 +1,5 @@
 import random as py_random
-
+""" Usado para gerar valores randonicos"""
 names = [
     "Alice",
     "Miguel",

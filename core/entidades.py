@@ -68,7 +68,7 @@ class Pagamento:
         self.situacao = situacao
 
     def __str__(self) -> str:
-        return "Forma: {} \t Valor: {} \t Parcelamento: {}\t Situação: {}".format(self.valor, self.forma_pagamento, self.parcelamento, self.situacao)
+        return "Forma: {} \t Valor: {} \t Parcelamento: {}\t Situação: {}".format(self.valor, self.forma, self.parcelamento, self.situacao)
 
 
 class Medicamento:
@@ -109,7 +109,7 @@ class Atendimento:
         self.tutor = tutor
         self.motivo = motivo
         self.tipo = tipo
-        self.pagamento = pagamento  # classe pagamento
+        self.pagamento = pagamento  
         self.situacao = situacao
         self.exames = exames
         self.id = str(uuid.uuid4())

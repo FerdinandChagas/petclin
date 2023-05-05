@@ -11,11 +11,11 @@ historico_de_pagamentos = []
 def processar_pagamento():
     clean()
     print("\n--- Dados para pagamento ---\n".upper())
-    print("\ninforme um valor: ".upper())
+    print("\ninforme um valor para pagamento: ".upper())
     valor = float(input())
-    print("\ninforme a forma pagamento: ".upper())
+    print("\ninforme a forma pagamento que deseja: ".upper())
     forma_pagamento = input()
-    print("\ninforme a quantidade de parcelamento: ".upper())
+    print("\ninforme a quantidade de parcelamento que deseja: ".upper())
     parcelamento = input()
     situacao = True
     # Simula o processamento do pagamento
@@ -42,8 +42,7 @@ def processar_pagamento():
 def mostrar_historico_de_pagamentos():
     print("Histórico de pagamentos realizados:")
     for pagamento in historico_de_pagamentos:
-        print("Forma de pagamento: {}, Parcelamento: {}x, Valor: R$ {:.2f}, Situação: {}".format(
-            pagamento["forma_pagamento"], pagamento["parcelamento"], pagamento["valor"], pagamento["situacao"]))
+        print(pagamento)
 
 
 # Exemplo de uso das funções processar_pagamento e mostrar_historico_de_pagamentos

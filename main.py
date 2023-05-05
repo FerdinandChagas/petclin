@@ -2,6 +2,7 @@ from datetime import datetime
 from core.agendamento import Agendamento
 from core.entidades import Animal, Cliente, Medicamento, Funcionario, Exame, Atendimento
 from core.pagamento import processar_pagamento
+from core.pagamento import mostrar_historico_de_pagamentos
 from utils.funcionario import get_funcionarios
 from utils.medicamento import get_medicamentos
 from utils.clients import get_clients
@@ -67,7 +68,8 @@ def render_agendamentos():
         print(
             "------------- 7 - Listar todas as Solicitações de Exames -------------".upper())
 
-        print("-------------          8 - Sair         -------------".upper())
+        print("-------------          8 - Historico de pagamentos       -------------".upper())
+        print("-------------          9 -  Sair       -------------".upper())
         print("\ninforme sua entrada: ".upper())
         indice_menu = int(input())
         if indice_menu == 1:
@@ -138,9 +140,13 @@ def render_agendamentos():
                     for exame in controle_agendamento.obterSolicitacoes(atendimento):
                         print(exame)
         elif indice_menu == 8:
+            clean()
+            mostrar_historico_de_pagamentos()
+
+        elif indice_menu == 9:
             break
 
 
 render_agendamentos()
 
-# print([str(c) for c in get_clients()])
+

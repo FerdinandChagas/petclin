@@ -1,8 +1,8 @@
 import os
-
+""" funções usadas para limpar o terminal e printar as informações"""
 
 def clean():
-    os.system('clear')
+    os.system('cls')
 
 
 def str_user(self):
