@@ -3,6 +3,7 @@ from core.agendamento import Agendamento
 from core.entidades import Animal, Cliente, Medicamento, Funcionario, Exame, Atendimento
 from core.pagamento import processar_pagamento
 from core.pagamento import mostrar_historico_de_pagamentos
+from core.funcionario import add_funcionarios
 from utils.funcionario import get_funcionarios
 from utils.medicamento import get_medicamentos
 from utils.clients import get_clients
@@ -47,8 +48,7 @@ def add_exame(atendimento: Atendimento):
         diagnostico = input()
         controle_agendamento.adicionarPrescicao(atendimento, Exame(medicacao=medicamento_search_by_id(), paciente=atendimento.animal, responsavel=atendimento.tutor, situacao=situacao, dataDiagnostico=str(
             datetime.now().date()), sintoma=sintoma, dataExame=str(datetime.now().date()), diagnostico=diagnostico, profissional=funcionarios_search_by_id()))
-
-
+        
 def render_agendamentos():
 
     def atendimento_search_by_id():
@@ -69,7 +69,9 @@ def render_agendamentos():
             "------------- 7 - Listar todas as Solicitações de Exames -------------".upper())
 
         print("-------------          8 - Historico de pagamentos       -------------".upper())
-        print("-------------          9 -  Sair       -------------".upper())
+        print("-------------      9 - Funcionario Bater o ponto -----------".upper())
+        print("-------------      10 - Visualizar pontos Funcionario  ------------".upper())
+        print("-------------                   11 -  Sair       -------------".upper())
         print("\ninforme sua entrada: ".upper())
         indice_menu = int(input())
         if indice_menu == 1:
@@ -144,6 +146,16 @@ def render_agendamentos():
             mostrar_historico_de_pagamentos()
 
         elif indice_menu == 9:
+            clean()
+            add_funcionarios(funcionarios_search_by_id()) 
+
+        elif indice_menu == 10:
+            clean()
+            print(funcionarios_search_by_id())
+            
+        
+
+        elif indice_menu == 11:
             break
 
 

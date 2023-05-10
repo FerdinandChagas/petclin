@@ -11,7 +11,7 @@ def get_funcionarios() -> List[Funcionario]:
 
     for _ in range(0, 10):
         funcionario = Funcionario(funcao='Veterinária', escala='', historico_ferias=[
-        ], horario='8h ás 12h', login='', senha='123', salario=3000)
+        ], horario='8h ás 12h', login='', senha='123', salario=3000, pontos=[])
         funcionario.nome = get_name().capitalize()
         funcionario.telefone = get_phone()
         funcionario.cpf = get_cpf()

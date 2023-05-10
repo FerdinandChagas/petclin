@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 import uuid
 from utils.print import str_user
@@ -13,9 +14,19 @@ class Usuario:
         self.data_cadastro = data_cadastro
         self.id = None
 
+class PontoFuncionario():
+    def __init__(self):
+        self.data_logada = datetime.now()
+        self.codigo_identificador = uuid.uuid4() #gerando um codigo
+
+    def __str__(self) -> str:
+        return f'data Logada:{self.data_logada}\t' + f'Codigo Identificação {self.codigo_identificador}'
+
+        
+
 
 class Funcionario(Usuario):
-    def __init__(self, salario: float, funcao: str, horario: str, escala: str, login: str, senha: str, historico_ferias: list):
+    def __init__(self, salario: float, funcao: str, horario: str, escala: str, login: str, senha: str, historico_ferias: list, pontos: list):
         super().__init__(nome='', telefone="", email="",
                          cpf="", endereco="", data_cadastro="")
         self.salario = salario
@@ -25,9 +36,13 @@ class Funcionario(Usuario):
         self.login = login
         self.senha = senha
         self.historico_ferias = historico_ferias  # list<ferias>
+        self.pontos = pontos #list pontos
 
     def __str__(self) -> str:
-        return f"{str_user(self)}Salario: {self.salario}\tFunção: {self.funcao}\tHorário: {self.horario}\tEscala: {self.escala}\nLogin: {self.login}\tSenha: {self.senha}\n"
+        _str_pontos =''
+        for p in self.pontos:
+            _str_pontos += f"{p}\n"
+        return f"{str_user(self)}Salario: {self.salario}\tFunção: {self.funcao}\tHorário: {self.horario}\tEscala: {self.escala}\nLogin: {self.login}\tSenha: {self.senha}\tpontos:\n{_str_pontos}\n"
 
 
 class Cliente(Usuario):
